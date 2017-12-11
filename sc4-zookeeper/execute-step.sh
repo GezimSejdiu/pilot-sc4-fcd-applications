@@ -6,7 +6,7 @@ if [[ $ENABLE_INIT_DAEMON = "true" ]]
        while true; do
 	   sleep 5
 	   echo -n '.'
-	   string=$(curl -sL -w "%{http_code}" -X PUT $INIT_DAEMON_BASE_URI/execute?step=$INIT_DAEMON_STEP -d "" -o /dev/null)
+	   string=$(curl -w "%{http_code}" -X PUT $INIT_DAEMON_BASE_URI/execute?step=$INIT_DAEMON_STEP -d "")
 	   [ "$string" = "204" ] && break
        done
        echo "Notified execution of step ${INIT_DAEMON_STEP}"
