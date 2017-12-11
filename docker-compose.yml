@@ -9,7 +9,7 @@ services:
         environment:
             - MYID=1
             - INIT_DAEMON_STEP=setup_zookeeper
-            - ENABLE_INIT_DAEMON = "true"
+            - ENABLE_INIT_DAEMON="true"
         expose:
             - "2181"
         ports:
@@ -271,6 +271,8 @@ services:
             - ./data/database:/data
         networks:
             - pilot-sc4-net
+        ports:
+            - 8890:8890
 
     pipeline:
         image: bde2020/mu-pipeline-service:0.1.0
