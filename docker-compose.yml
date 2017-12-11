@@ -9,7 +9,7 @@ services:
         environment:
             - MYID=1
             - INIT_DAEMON_STEP=setup_zookeeper
-            - ENABLE_INIT_DAEMON="true"
+            - ENABLE_INIT_DAEMON=true
         expose:
             - "2181"
         ports:
@@ -27,7 +27,7 @@ services:
             - ZOOKEEPER_SERVERS=zookeeper:2181
             - INITIAL_TOPICS=taxi
             - INIT_DAEMON_STEP=setup_kafka
-            - ENABLE_INIT_DAEMON = "true"
+            - ENABLE_INIT_DAEMON=true
         depends_on:
             - zookeeper
         expose:
