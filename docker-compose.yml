@@ -305,10 +305,10 @@ services:
 #         networks:
 #             - pilot-sc4-net
 
-#     initdaemon:
-#         image: bde2020/mu-init-daemon-service:0.1.0
-#         hostname: initdaemon
-#         container_name: initdaemon
+    initdaemon:
+        image: bde2020/mu-init-daemon-service:0.1.0
+        hostname: initdaemon
+        container_name: initdaemon
 #         networks:
 #             - pilot-sc4-net
 
