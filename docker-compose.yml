@@ -10,6 +10,7 @@ services:
             - MYID=1
             - INIT_DAEMON_STEP=setup_zookeeper
             - ENABLE_INIT_DAEMON=true
+            - INIT_DAEMON_BASE_URI=http://initdaemon
         expose:
             - "2181"
         ports:
@@ -28,6 +29,7 @@ services:
             - INITIAL_TOPICS=taxi
             - INIT_DAEMON_STEP=setup_kafka
             - ENABLE_INIT_DAEMON=true
+            - INIT_DAEMON_BASE_URI=http://initdaemon
         depends_on:
             - zookeeper
         expose:
