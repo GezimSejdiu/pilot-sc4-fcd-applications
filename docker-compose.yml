@@ -294,7 +294,7 @@ services:
         # networks:
         #     - pilot-sc4-net
         ports:
-            - 8890:8890
+            - 9980:8890
         labels:
             - "logging=true"
 
