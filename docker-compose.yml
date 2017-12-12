@@ -298,12 +298,12 @@ services:
         labels:
             - "logging=true"
 
-#     pipeline:
-#         image: bde2020/mu-pipeline-service:0.1.0
-#         hostname: pipeline
-#         container_name: pipeline
-#         networks:
-#             - pilot-sc4-net
+    pipeline:
+        image: bde2020/mu-pipeline-service:0.1.0
+        hostname: pipeline
+        container_name: pipeline
+        # networks:
+        #     - pilot-sc4-net
 
     initdaemon:
         image: bde2020/mu-init-daemon-service:0.1.0
@@ -312,27 +312,27 @@ services:
 #         networks:
 #             - pilot-sc4-net
 
-#     integratorui:
-#         image: bde2020/integrator-ui:latest
-#         hostname: integratorui
-#         container_name: integratorui
-#         volumes:
-#             - ./config/integrator:/app/config
-#         environment:
-#             VIRTUAL_HOST: demo.big-data-europe.local
-#         networks:
-#             - pilot-sc4-net
+    integratorui:
+        image: bde2020/integrator-ui:latest
+        hostname: integratorui
+        container_name: integratorui
+        volumes:
+            - ./config/integrator:/app/config
+        environment:
+            VIRTUAL_HOST: demo.big-data-europe.local
+        # networks:
+        #     - pilot-sc4-net
 
-#     csswrapper:
-#         image: bde2020/nginx-proxy-with-css
-#         hostname: csswrapper
-#         container_name: csswrapper
-#         ports:
-#             - 80:80
-#         volumes:
-#             - /var/run/docker.sock:/tmp/docker.sock:ro
-#         networks:
-#             - pilot-sc4-net
+    csswrapper:
+        image: bde2020/nginx-proxy-with-css
+        hostname: csswrapper
+        container_name: csswrapper
+        ports:
+            - 80:80
+        volumes:
+            - /var/run/docker.sock:/tmp/docker.sock:ro
+        # networks:
+        #     - pilot-sc4-net
 
 # networks:
 #   pilot-sc4-net:
