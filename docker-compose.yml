@@ -323,16 +323,16 @@ services:
         # networks:
         #     - pilot-sc4-net
 
-    csswrapper:
-        image: bde2020/nginx-proxy-with-css
-        hostname: csswrapper
-        container_name: csswrapper
-        ports:
-            - 8888:80
-        volumes:
-            - /var/run/docker.sock:/tmp/docker.sock:ro
-        # networks:
-        #     - pilot-sc4-net
+    # csswrapper:
+    #     image: bde2020/nginx-proxy-with-css
+    #     hostname: csswrapper
+    #     container_name: csswrapper
+    #     ports:
+    #         - 8888:80
+    #     volumes:
+    #         - /var/run/docker.sock:/tmp/docker.sock:ro
+    #     networks:
+    #         - pilot-sc4-net
 
 # networks:
 #   pilot-sc4-net:
