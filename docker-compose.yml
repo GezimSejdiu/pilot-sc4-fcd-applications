@@ -129,7 +129,7 @@ services:
             - namenode
             - datanode
         ports:
-            - "9994:8042"
+            - "9994:8088"
 
     flink-master:
         image: flowofcontrol/fm-demo

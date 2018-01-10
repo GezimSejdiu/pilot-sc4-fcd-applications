@@ -4,7 +4,7 @@
     "type": "user-interfaces",
     "attributes": {
       "label": "Apache Flink Dashboard",
-      "base-url": "http://localhost:9995"
+      "base-url": "http://flink-master.bid-data-europ.local:9995"
     }
   },
   {
@@ -12,7 +12,7 @@
     "type": "user-interfaces",
     "attributes": {
       "label": "HDFS",
-      "base-url": "http://localhost:9993"
+      "base-url": "http://hdfs.bid-data-europ.local:9993"
     }
   },
   {
@@ -20,7 +20,7 @@
     "type": "user-interfaces",
     "attributes": {
       "label": "Hue",
-      "base-url": "http://localhost:9994",
+      "base-url": "http://hue.bid-data-europ.local:9994",
       "append-path": "/home"
     }
   },
@@ -29,7 +29,7 @@
     "type": "user-interfaces",
     "attributes": {
       "label": "Virtuoso",
-      "base-url": "http://localhost:9980"
+      "base-url": "http://virt.bid-data-europ.local:9980"
     }
   },
   {
@@ -37,7 +37,7 @@
     "type": "user-interfaces",
     "attributes": {
       "label": "Monitor",
-      "base-url": "http://localhost:9996"
+      "base-url": "http://monitor.bid-data-europ.local:9996"
     }
   },
   {
@@ -45,7 +45,7 @@
     "type": "user-interfaces",
     "attributes": {
       "label": "Resources",
-      "base-url": "http://localhost:9991"
+      "base-url": "http://monitor.bid-data-europ.local:9991"
     }
   },
   {
@@ -53,7 +53,7 @@
     "type": "user-interfaces",
     "attributes": {
       "label": "History",
-      "base-url": "http://localhost:9992"
+      "base-url": "http://history.bid-data-europ.local:9992"
     }
   }
 ]
