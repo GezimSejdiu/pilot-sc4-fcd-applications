@@ -281,7 +281,3 @@ services:
             - 8888:80
         volumes:
             - /var/run/docker.sock:/tmp/docker.sock:ro
-    initdaemon:
-        image: bde2020/mu-init-daemon-service:0.1.0
-        hostname: initdaemon
-        container_name: initdaemon
