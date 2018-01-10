@@ -3,8 +3,6 @@ services:
     zookeeper:
         build:
             context: ./sc4-zookeeper
-        hostname: zookeeper
-        container_name: zookeeper
         environment:
             - MYID=1
             - INIT_DAEMON_STEP=setup_zookeeper
@@ -20,8 +18,6 @@ services:
     kafka:
         build:
             context: ./sc4-kafka
-        hostname: kafka
-        container_name: kafka
         environment:
             - ZOOKEEPER_SERVERS=zookeeper:2181
             - INITIAL_TOPICS=taxi
@@ -37,8 +33,6 @@ services:
            
     namenode:
       image: bde2020/hadoop-namenode:1.1.0-hadoop2.7.1-java8
-      hostname: namenode
-      container_name: namenode
       environment:
               CSS_SOURCE: "hadoop"
               CLUSTER_NAME: test
@@ -55,8 +49,6 @@ services:
 
     datanode:
         image: bde2020/hadoop-datanode:1.1.0-hadoop2.7.1-java8
-        hostname: datanode
-        container_name: datanode
         environment:
               CSS_SOURCE: "hadoop"
               VIRTUAL_HOST: hdfs-datanode.big-data-europe.local
@@ -74,8 +66,6 @@ services:
 
     resourcemanager:
         image: bde2020/hadoop-resourcemanager:1.1.0-hadoop2.7.1-java8
-        hostname: resourcemanager
-        container_name: resourcemanager
         expose:
             - "8031"
             - "8088"
@@ -93,8 +83,6 @@ services:
 
     historyserver:
         image: bde2020/hadoop-historyserver:1.1.0-hadoop2.7.1-java8
-        hostname: historyserver
-        container_name: historyserver
         volumes:
             - ./data/hadoop/historyserver:/hadoop/yarn/timeline
         env_file:
@@ -111,8 +99,6 @@ services:
 
     nodemanager:
         image: bde2020/hadoop-nodemanager:1.1.0-hadoop2.7.1-java8
-        hostname: nodemanager
-        container_name: nodemanager
         expose:
             - "8042"
         environment:
@@ -127,8 +113,6 @@ services:
 
     filebrowser:
         image: bde2020/hdfs-filebrowser:latest
-        hostname: filebrowser
-        container_name: filebrowser
         expose:
             - "8088"
         environment:
@@ -141,8 +125,6 @@ services:
 
     flink-master:
         image: flowofcontrol/fm-demo
-        hostname: "flink-master"
-        container_name: "flink-master"
         expose:
               - "8081"
               - "8080"
@@ -161,8 +143,6 @@ services:
 
     flink-worker:
         image: flowofcontrol/fw-demo
-        hostname: flink-worker
-        container_name: flink-worker
         links:
               - flink-master
         environment:
@@ -175,8 +155,6 @@ services:
 
     flink-worker2:
         image: bde2020/flink-worker:latest
-        hostname: flink-worker2
-        container_name: flink-worker2
         environment:
               FLINK_MASTER_PORT_6123_TCP_ADDR: "flink-master"
               CSS_SOURCE: "flink-dashboard"
@@ -187,7 +165,6 @@ services:
 
     producer:
         image: flowofcontrol/pd-demo
-        container_name: producer
         environment:
               HDFS_URL: hdfs://namenode:8020
               INIT_DAEMON_STEP: floating_producer
@@ -200,7 +177,6 @@ services:
 
     consumer:
         image: flowofcontrol/cd-demo
-        container_name: consumer
         environment:
               HDFS_URL: hdfs://namenode:8020
               INIT_DAEMON_STEP: floating_consumer
@@ -213,8 +189,6 @@ services:
 
     monitor:
         image: bde2020/pipeline-monitor-frontend:0.1.0
-        hostname: monitor
-        container_name: monitor
         links:
             - identifier:backend
         depends_on:
@@ -224,15 +198,11 @@ services:
 
     identifier:
         image: semtech/mu-identifier:1.0.0
-        hostname: identifier
-        container_name: identifier
         labels:
             - "logging=true"
 
     dispatcher:
         image: semtech/mu-dispatcher:1.0.1
-        hostname: dispatcher
-        container_name: dispatcher
         volumes:
             - ./config:/config
         labels:
@@ -240,8 +210,6 @@ services:
 
     database:
         image: tenforce/virtuoso:1.0.0-virtuoso7.2.2
-        hostname: database
-        container_name: database
         environment:
             - SPARQL_UPDATE=true
             - DEFAULT_GRAPH=http://mu.semte.ch/application
@@ -256,18 +224,12 @@ services:
 
     pipeline:
         image: bde2020/mu-pipeline-service:0.1.0
-        hostname: pipeline
-        container_name: pipeline
 
     initdaemon:
         image: bde2020/mu-init-daemon-service:0.1.0
-        hostname: initdaemon
-        container_name: initdaemon
 
     integratorui:
         image: bde2020/integrator-ui:latest
-        hostname: integratorui
-        container_name: integratorui
         volumes:
             - ./config/integrator:/app/config
         environment:
@@ -275,8 +237,6 @@ services:
 
     csswrapper:
         image: bde2020/nginx-proxy-with-css
-        hostname: csswrapper
-        container_name: csswrapper
         ports:
             - 8888:80
         volumes:
