@@ -3,57 +3,44 @@
     "id": 1,
     "type": "user-interfaces",
     "attributes": {
-      "label": "Apache Flink Dashboard",
-      "base-url": "http://flink-master.bid-data-europ.local:9995"
+      "engine": false,
+      "repo-name": "flink-master",
+      "label": "Flink",
+      "base-url": "http://loclhost:9996",
+      "append-path": ""
     }
   },
   {
     "id": 2,
     "type": "user-interfaces",
     "attributes": {
+      "engine": false,
+      "repo-name": "HDFS",
       "label": "HDFS",
-      "base-url": "http://hdfs.bid-data-europ.local:9993"
+      "base-url": "http://loclhost:9993",
+      "append-path": ""
     }
   },
   {
     "id": 3,
     "type": "user-interfaces",
     "attributes": {
+      "engine": false,
+      "repo-name": "Hue",
       "label": "Hue",
-      "base-url": "http://hue.bid-data-europ.local:9994",
-      "append-path": "/home"
+      "base-url": "http://loclhost:9994",
+      "append-path": ""
     }
   },
   {
     "id": 4,
     "type": "user-interfaces",
     "attributes": {
+      "engine": false,
+      "repo-name": "virtuoso",
       "label": "Virtuoso",
-      "base-url": "http://virt.bid-data-europ.local:9980"
-    }
-  },
-  {
-    "id": 5,
-    "type": "user-interfaces",
-    "attributes": {
-      "label": "Monitor",
-      "base-url": "http://monitor.bid-data-europ.local:9996"
-    }
-  },
-  {
-    "id": 6,
-    "type": "user-interfaces",
-    "attributes": {
-      "label": "Resources",
-      "base-url": "http://monitor.bid-data-europ.local:9991"
-    }
-  },
-  {
-    "id": 7,
-    "type": "user-interfaces",
-    "attributes": {
-      "label": "History",
-      "base-url": "http://history.bid-data-europ.local:9992"
+      "base-url": "http://loclhost:9980",
+      "append-path": ""
     }
   }
 ]

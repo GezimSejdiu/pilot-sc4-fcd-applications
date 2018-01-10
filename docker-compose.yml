@@ -259,7 +259,7 @@ services:
         restart: always
 
     integratorui:
-        image: bde2020/integrator-ui:latest
+        image: bde2020/integrator-ui:1.8.7
         volumes:
             - ./config/integrator:/app/config
         environment:
