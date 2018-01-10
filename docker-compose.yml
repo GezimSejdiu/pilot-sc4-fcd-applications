@@ -75,6 +75,8 @@ services:
             CSS_SOURCE: "hadoop-resource-manager"
         env_file:
             - ./config/hadoop/hadoop.env
+        ports:
+            - "9991:8088"
         depends_on:
               - namenode
               - datanode
@@ -94,6 +96,8 @@ services:
         depends_on:
               - namenode
               - datanode
+        ports:
+            - "9992:8188"
         labels:
             - "logging=true"
 
@@ -110,6 +114,8 @@ services:
         depends_on:
               - namenode
               - datanode
+        ports:
+            - "9993:8042"
 
     filebrowser:
         image: bde2020/hdfs-filebrowser:latest
@@ -122,6 +128,8 @@ services:
         depends_on:
             - namenode
             - datanode
+        ports:
+            - "9994:8042"
 
     flink-master:
         image: flowofcontrol/fm-demo
@@ -140,6 +148,8 @@ services:
         depends_on:
               - namenode
               - datanode
+        ports:
+            - "9995:8081"
 
     flink-worker:
         image: flowofcontrol/fw-demo
@@ -195,6 +205,8 @@ services:
             - identifier
         environment:
               VIRTUAL_HOST: monitor.big-data-europe.local
+        ports:
+            - "9996:80"
 
     identifier:
         image: semtech/mu-identifier:1.0.0
@@ -234,6 +246,8 @@ services:
             - ./config/integrator:/app/config
         environment:
             VIRTUAL_HOST: demo.big-data-europe.local
+        ports:
+            - "9999:80"
 
     csswrapper:
         image: bde2020/nginx-proxy-with-css
