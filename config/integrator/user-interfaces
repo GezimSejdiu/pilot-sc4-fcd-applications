@@ -4,7 +4,7 @@
     "type": "user-interfaces",
     "attributes": {
       "label": "Apache Flink Dashboard",
-      "base-url": "http://flink-master.big-data-europe.local"
+      "base-url": "http://localhost:9995"
     }
   },
   {
@@ -12,7 +12,7 @@
     "type": "user-interfaces",
     "attributes": {
       "label": "HDFS",
-      "base-url": "http://hdfs-namenode.big-data-europe.local"
+      "base-url": "http://localhost:9993"
     }
   },
   {
@@ -20,7 +20,7 @@
     "type": "user-interfaces",
     "attributes": {
       "label": "Hue",
-      "base-url": "http://hue.big-data-europe.local",
+      "base-url": "http://localhost:9994",
       "append-path": "/home"
     }
   },
@@ -29,7 +29,7 @@
     "type": "user-interfaces",
     "attributes": {
       "label": "Virtuoso",
-      "base-url": "http://virtuoso.big-data-europe.local"
+      "base-url": "http://localhost:9980"
     }
   },
   {
@@ -37,7 +37,23 @@
     "type": "user-interfaces",
     "attributes": {
       "label": "Monitor",
-      "base-url": "http://monitor.big-data-europe.local"
+      "base-url": "http://localhost:9996"
+    }
+  },
+  {
+    "id": 6,
+    "type": "user-interfaces",
+    "attributes": {
+      "label": "Resources",
+      "base-url": "http://localhost:9991"
+    }
+  },
+  {
+    "id": 7,
+    "type": "user-interfaces",
+    "attributes": {
+      "label": "History",
+      "base-url": "http://localhost:9992"
     }
   }
 ]
