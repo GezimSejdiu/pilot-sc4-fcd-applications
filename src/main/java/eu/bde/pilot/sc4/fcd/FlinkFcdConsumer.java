@@ -3,6 +3,7 @@ package eu.bde.pilot.sc4.fcd;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.URI;
 import java.net.UnknownHostException;
@@ -136,11 +137,11 @@ public class FlinkFcdConsumer {
 			.timeWindow(Time.minutes(TIME_WINDOW_PARAM_VALUE))
 			.apply(new EventCounter());
 	
-	  // stores the data in Elasticsearch
-	  //saveFcdDataElasticsearch(boxBoundedEvents);
-	  
 	  // stores the data in Hadoop HDFS
-	  saveFcdDataHdfs(boxBoundedEvents, HDFS_SINK_PARAM_VALUE);
+	  // saveFcdDataHdfs(boxBoundedEvents, HDFS_SINK_PARAM_VALUE);
+	  
+	  // stores the data in Elasticsearch
+	  saveFcdDataElasticsearch(boxBoundedEvents);
 	  
 	  //boxBoundedEvents.print();
     
@@ -218,11 +219,9 @@ public class FlinkFcdConsumer {
   }
   
   /**
-<<<<<<< HEAD
-   * 
    * @param inputStream
    * @param sinkPath
- * @throws IOException 
+   * @throws IOException 
    */
   public static void saveGridDataHdfs(DataStream<Tuple5<Integer, Double, Double, Integer ,String>> inputStream, String sinkPath) throws IOException {
 	Configuration conf = new Configuration();
@@ -240,9 +239,6 @@ public class FlinkFcdConsumer {
   }
   /**
    * Writes the data in Hadoop HDFS  
-=======
-   * Stores the data in Hadoop HDFS  
->>>>>>> 3c3672cb1769c9fe6213f227e76316cd00b7689a
    * @param inputStream
    * @throws UnknownHostException
    */
@@ -261,40 +257,41 @@ public class FlinkFcdConsumer {
    * @param inputStream
    * @throws UnknownHostException
    */
-  public static void saveFcdDataElasticsearch(DataStream<Tuple5<Integer, Double, Double, Integer ,String>> inputStream) throws UnknownHostException {
-    Map<String, String> config = new HashMap<>();
-    // This instructs the sink to emit after every element, otherwise they would be buffered
-    config.put("bulk.flush.max.actions", "1");
-    config.put("cluster.name", "pilot-sc4");
-  
-    List<InetSocketAddress> transports = new ArrayList<InetSocketAddress>();
-    transports.add(new InetSocketAddress("127.0.0.1", 9300));
-    //transports.add(new InetSocketTransportAddress("node-2", 9300));
+	public static void saveFcdDataElasticsearch(
+			DataStream<Tuple5<Integer, Double, Double, Integer, String>> inputStream) throws UnknownHostException {
+		Map<String, String> config = new HashMap<>();
+		// This instructs the sink to emit after every element, otherwise they would be
+		// buffered
+		config.put("bulk.flush.max.actions", "1");
+		config.put("cluster.name", "elasticsearch");
 
-    inputStream.addSink(new ElasticsearchSink<Tuple5<Integer, Double, Double, Integer, String>>(config, transports, new ElasticsearchSinkFunction<Tuple5<Integer, Double, Double, Integer, String>>() {
-    
-    public IndexRequest createIndexRequest(
-        Tuple5<Integer, Double, Double, Integer, String> record) {
-      Map<String, Object> json = new HashMap<>();
-          json.put("cellid", record.getField(0));
-          json.put("location", String.valueOf(record.getField(1)) + "," + String.valueOf(record.getField(2))); // lat,lon
-          json.put("vehicles", record.getField(3));
-          json.put("timestamp", record.getField(4));
-          
-          return Requests.indexRequest()
-                  .index("thessaloniki")
-                  .type("floating-cars")
-                  .source(json);
+		List<InetSocketAddress> transports = new ArrayList<InetSocketAddress>();
+		log.info("XXXXX (InetAddress.getByName(elasticsearch), 9300))");
+		transports.add(new InetSocketAddress(InetAddress.getByName("elasticsearch"), 9300));
+		// transports.add(new InetSocketTransportAddress("172.19.0.2", 9300)); //
+		// remember experiment to address elasticsearch in s swarm -- not successful
 
-    }
+		inputStream.addSink(new ElasticsearchSink<Tuple5<Integer, Double, Double, Integer, String>>(config, transports,
+				new ElasticsearchSinkFunction<Tuple5<Integer, Double, Double, Integer, String>>() {
 
-    @Override
-    public void process(Tuple5<Integer, Double, Double, Integer, String> record,
-        RuntimeContext ctx, RequestIndexer indexer) {
-      indexer.add(createIndexRequest(record));
-      
-    }
-  }));
-  }
+					public IndexRequest createIndexRequest(Tuple5<Integer, Double, Double, Integer, String> record) {
+						Map<String, Object> json = new HashMap<>();
+						json.put("cellid", record.f0);
+						json.put("location", record.f1.toString() + "," + record.f2.toString()); // lat,lon
+						json.put("vehicles", record.f3);
+						json.put("timestamp", record.f4);
+
+						return Requests.indexRequest().index("thessaloniki").type("floating-cars").source(json);
+
+					}
+
+					@Override
+					public void process(Tuple5<Integer, Double, Double, Integer, String> record, RuntimeContext ctx,
+							RequestIndexer indexer) {
+						indexer.add(createIndexRequest(record));
+
+					}
+				}));
+	}
 
 }
