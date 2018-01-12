@@ -4,10 +4,8 @@
     "type": "user-interfaces",
     "attributes": {
       "engine": false,
-      "repo-name": "flink-master",
       "label": "Flink",
-      "base-url": "http://loclhost:9996",
-      "append-path": ""
+      "base-url": "http://localhost:9996",
     }
   },
   {
@@ -15,10 +13,8 @@
     "type": "user-interfaces",
     "attributes": {
       "engine": false,
-      "repo-name": "HDFS",
       "label": "HDFS",
-      "base-url": "http://loclhost:9993",
-      "append-path": ""
+      "base-url": "http://localhost:9993",
     }
   },
   {
@@ -26,10 +22,8 @@
     "type": "user-interfaces",
     "attributes": {
       "engine": false,
-      "repo-name": "Hue",
       "label": "Hue",
-      "base-url": "http://loclhost:9994",
-      "append-path": ""
+      "base-url": "http://localhost:9994",
     }
   },
   {
@@ -37,10 +31,9 @@
     "type": "user-interfaces",
     "attributes": {
       "engine": false,
-      "repo-name": "virtuoso",
       "label": "Virtuoso",
-      "base-url": "http://loclhost:9980",
-      "append-path": ""
+      "base-url": "http://localhost:9980",
+      "append-path": "sparql"
     }
   }
 ]
