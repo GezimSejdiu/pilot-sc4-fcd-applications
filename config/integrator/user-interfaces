@@ -6,6 +6,7 @@
       "engine": false,
       "label": "Flink",
       "base-url": "http://localhost:9996",
+      "append-path": ""
     }
   },
   {
@@ -15,6 +16,7 @@
       "engine": false,
       "label": "HDFS",
       "base-url": "http://localhost:9993",
+      "append-path": ""
     }
   },
   {
@@ -24,6 +26,7 @@
       "engine": false,
       "label": "Hue",
       "base-url": "http://localhost:9994",
+      "append-path": ""
     }
   },
   {
