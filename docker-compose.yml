@@ -275,3 +275,18 @@ services:
         volumes:
             - /var/run/docker.sock:/tmp/docker.sock:ro
         restart: always
+
+    elasticsearch:
+      image: bde2020/sc4-elasticsearch
+      build:
+        context: sc4-elasticsearch/
+        ports:
+          - 9200:9200
+          - 9300:9300
+    # kibana:
+    #   #        image: kibana:6.1.0
+    #   image: kibana:4.5.0
+    #   environment:
+    #     ELASTICSEARCH_URL: http://elasticsearch:9200
+    #     ports:
+    #       - 5601:5601
