@@ -5,7 +5,7 @@
     "attributes": {
       "engine": false,
       "label": "Flink",
-      "base-url": "http://localhost:9996",
+      "base-url": "http://localhost:9995",
       "append-path": ""
     }
   },
@@ -14,7 +14,7 @@
     "type": "user-interfaces",
     "attributes": {
       "engine": false,
-      "label": "HDFS",
+      "label": "Node Manager",
       "base-url": "http://localhost:9993",
       "append-path": ""
     }
@@ -24,7 +24,7 @@
     "type": "user-interfaces",
     "attributes": {
       "engine": false,
-      "label": "Hue",
+      "label": "HDFS",
       "base-url": "http://localhost:9994",
       "append-path": ""
     }
@@ -36,8 +36,38 @@
       "engine": false,
       "label": "Virtuoso",
       "base-url": "http://localhost:9980",
-      "append-path": "sparql"
+      "append-path": "/sparql"
     }
-  }
+  },
+  {
+    "id": 5,
+    "type": "user-interfaces",
+    "attributes": {
+      "engine": false,
+      "label": "PL Monitor",
+      "base-url": "http://localhost:9996",
+      "append-path": ""
+    }
+  },
+  {
+    "id": 6,
+    "type": "user-interfaces",
+    "attributes": {
+      "engine": false,
+      "label": "Resource",
+      "base-url": "http://localhost:9991",
+      "append-path": ""
+    }
+  },
+  {
+    "id": 7,
+    "type": "user-interfaces",
+    "attributes": {
+      "engine": false,
+      "label": "History",
+      "base-url": "http://localhost:9992",
+      "append-path": ""
+    }
+  },
 ]
 }
