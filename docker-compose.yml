@@ -269,12 +269,12 @@ services:
       build:
         context: sc4-elasticsearch/
       ports:
-        - 9200:9200
-        - 9300:9300
+        - 9201:9200
+        - 9301:9300
     kibana:
       #        image: kibana:6.1.0
       image: kibana:4.5.0
       environment:
-        ELASTICSEARCH_URL: http://elasticsearch:9200
+        ELASTICSEARCH_URL: http://elasticsearch:9201
       ports:
         - 5601:5601
