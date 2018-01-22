@@ -24,9 +24,9 @@
     "type": "user-interfaces",
     "attributes": {
       "engine": false,
-      "label": "HDFS",
+      "label": "Hue",
       "base-url": "http://localhost:9994",
-      "append-path": ""
+      "append-path": "/home"
     }
   },
   {
@@ -44,7 +44,7 @@
     "type": "user-interfaces",
     "attributes": {
       "engine": false,
-      "label": "PL Monitor",
+      "label": "Monitor",
       "base-url": "http://localhost:9996",
       "append-path": ""
     }
@@ -54,7 +54,7 @@
     "type": "user-interfaces",
     "attributes": {
       "engine": false,
-      "label": "Resource",
+      "label": "Resources",
       "base-url": "http://localhost:9991",
       "append-path": ""
     }
