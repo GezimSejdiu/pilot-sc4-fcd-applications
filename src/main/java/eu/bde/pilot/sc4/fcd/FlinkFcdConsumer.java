@@ -138,9 +138,11 @@ public class FlinkFcdConsumer {
 			.apply(new EventCounter());
 	
 	  // stores the data in Hadoop HDFS
-	  // saveFcdDataHdfs(boxBoundedEvents, HDFS_SINK_PARAM_VALUE);
+		log.info("Storing in HDFS");	  
+		saveFcdDataHdfs(boxBoundedEvents, HDFS_SINK_PARAM_VALUE);
 	  
 	  // stores the data in Elasticsearch
+		log.info("Storing in Elasticsearch");
 	  saveFcdDataElasticsearch(boxBoundedEvents);
 	  
 	  //boxBoundedEvents.print();
@@ -266,9 +268,9 @@ public class FlinkFcdConsumer {
 		config.put("cluster.name", "elasticsearch");
 
 		List<InetSocketAddress> transports = new ArrayList<InetSocketAddress>();
-		log.info("XXXXX (InetAddress.getByName(elasticsearch), 9300))");
-		transports.add(new InetSocketAddress(InetAddress.getByName("elasticsearch"), 9300));
-		// transports.add(new InetSocketTransportAddress("172.19.0.2", 9300)); //
+		//log.info("XXXXX (InetAddress.getByName(elasticsearch), 9300))");
+		// /!\ Elasticsearch IP has to be hardcoded here /!\ //
+		transports.add(new InetSocketAddress(InetAddress.getByName("172.20.0.2"), 9300));
 		// remember experiment to address elasticsearch in s swarm -- not successful
 
 		inputStream.addSink(new ElasticsearchSink<Tuple5<Integer, Double, Double, Integer, String>>(config, transports,

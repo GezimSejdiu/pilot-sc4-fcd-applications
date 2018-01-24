@@ -26,8 +26,8 @@ services:
             - INIT_DAEMON_BASE_URI=http://initdaemon
         depends_on:
             - zookeeper
-        expose:
-            - "9092"
+        ports:
+            - "9092:9092"
         labels:
             - "logging=true"
            
@@ -44,6 +44,8 @@ services:
             - ./data/hadoop/namenode:/hadoop/dfs/name
       expose:
             - "50070"
+      ports:
+            - "8020:8020"
       labels:
             - "logging=true"
 
@@ -182,28 +184,31 @@ services:
               - ./config/flink-worker/flink-conf.yml:/usr/local/flink/conf/flink-conf.yml
 
     producer:
-        image: flowofcontrol/pd-demo
+        image: bde2020/pilot-sc4-producer
+        build:
+            context: .
+            dockerfile: sc4-producer.dockerfile
         environment:
               HDFS_URL: hdfs://namenode:8020
               INIT_DAEMON_STEP: floating_producer
-              FLINK_MASTER_PORT_6123_TCP_ADDR: flink-master
+              FLINK_MASTER_PORT_6123_TCP_ADDR: "flink-master"
               FLINK_MASTER_PORT_6123_TCP_PORT: "6123"
+              FLINK_APPLICATION_ARGS: "--path hdfs://namenode:8020/user/hue/taxi_sample_100k.txt --topic taxi"
         env_file:
               - ./config/hadoop/hadoop.env
-        depends_on:
-              - flink-master
-
     consumer:
-        image: flowofcontrol/cd-demo
+        image: bde2020/pilot-sc4-consumer
+        build:
+            context: .
+            dockerfile: sc4-consumer.dockerfile
         environment:
               HDFS_URL: hdfs://namenode:8020
               INIT_DAEMON_STEP: floating_consumer
-              FLINK_MASTER_PORT_6123_TCP_ADDR: flink-master
+              FLINK_MASTER_PORT_6123_TCP_ADDR: "flink-master"
               FLINK_MASTER_PORT_6123_TCP_PORT: "6123"
         env_file:
               - ./config/hadoop/hadoop.env
-        depends_on:
-              - flink-master
+
 
     monitor:
         image: bde2020/pipeline-monitor-frontend:0.1.0
@@ -265,7 +270,7 @@ services:
             - /var/run/docker.sock:/tmp/docker.sock:ro
 
     elasticsearch:
-      image: bde2020/sc4-elasticsearch
+      image: bde2020/sc4-elasticsearch  # check sc4-elasticsearch/Dockerfile
       build:
         context: sc4-elasticsearch/
       ports:
@@ -275,6 +280,6 @@ services:
       #        image: kibana:6.1.0
       image: kibana:4.5.0
       environment:
-        ELASTICSEARCH_URL: http://elasticsearch:9201
+        ELASTICSEARCH_URL: http://elasticsearch:9200
       ports:
         - 5602:5601

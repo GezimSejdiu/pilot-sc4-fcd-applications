@@ -1,8 +1,12 @@
 #!/bin/bash
 bak= $pwd
-cd data/db
+cd data/database/
 rm -fr dumps
-rm -fr virtuoso*
-rm -fr *.log
-rm -f clean-logs.sh
+rm -f virtuoso.db
+rm -f virtuoso.lck
+rm -f virtuoso.log
+rm -f virtuoso.pxa
+rm -f virtuoso-temp.db
+rm -f virtuoso.trx
+rm -f .config_set .data_loaded .dba_pwd_set
 cd "$bak"
