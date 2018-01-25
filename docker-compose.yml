@@ -188,8 +188,6 @@ services:
               FLINK_APPLICATION_JAR_NAME: "pilot-sc4-fcd-applications-0.1-jar-with-dependencies"
               FLINK_APPLICATION_MAIN_CLASS: "eu.bde.pilot.sc4.fcd.FlinkFcdProducer"
               FLINK_APPLICATION_ARGS: "--path hdfs://namenode:8020/user/hue/taxi_sample_100k.txt --topic taxi"
-        volumes:
-              - ./src:/src
         env_file:
               - ./config/hadoop/hadoop.env
         labels:
@@ -205,8 +203,6 @@ services:
               FLINK_APPLICATION_JAR_NAME: "pilot-sc4-fcd-applications-0.1-jar-with-dependencies"
               FLINK_APPLICATION_MAIN_CLASS: "eu.bde.pilot.sc4.fcd.FlinkFcdConsumer"
               FLINK_APPLICATION_ARGS: "--topic taxi --window 2 --sink hdfs://namenode:8020/user/hue/taxi_aggregates.txt --elasticsearch_endpoint elasticsearch --elasticsearch_port 9300"
-        volumes: 
-              - ./src:/src
         env_file:
               - ./config/hadoop/hadoop.env
         labels:
