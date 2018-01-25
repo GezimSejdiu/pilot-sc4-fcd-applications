@@ -82,7 +82,13 @@ public class FlinkFcdConsumer {
   private static String TIME_WINDOW_PARAM_NAME = "window";
   private static String HDFS_SINK_PARAM_NAME = "sink";
   private static String HDFS_SINK_PARAM_VALUE = null;
-  private static int TIME_WINDOW_PARAM_VALUE = 0;
+	private static String ELASTIC_ENDPOINT_NAME = "elasticsearch_endpoint";
+	private static String ELASTIC_ENDPOINT_VALUE = null;
+	private static String ELASTIC_ENDPOINT_DEFAULT = "elasticsearch";
+	private static String ELASTIC_PORT_NAME = "elasticsearch_port";
+	private static Integer ELASTIC_PORT_VALUE = null;
+	private static String ELASTIC_PORT_DEFAULT = "9300";
+	private static int TIME_WINDOW_PARAM_VALUE = 0;
   private static final int MAX_EVENT_DELAY = 60; // events are at most 60 sec out-of-order.
   private static final Logger log = LoggerFactory.getLogger(FlinkFcdConsumer.class);
 
@@ -99,6 +105,8 @@ public class FlinkFcdConsumer {
     KAFKA_TOPIC_PARAM_VALUE = parameter.get(KAFKA_TOPIC_PARAM_NAME);
     TIME_WINDOW_PARAM_VALUE = parameter.getInt(TIME_WINDOW_PARAM_NAME, TIME_WINDOW_PARAM_VALUE);
     HDFS_SINK_PARAM_VALUE = parameter.get(HDFS_SINK_PARAM_NAME);
+		ELASTIC_ENDPOINT_VALUE = parameter.get(ELASTIC_ENDPOINT_NAME) != null ? parameter.get(ELASTIC_ENDPOINT_NAME) : ELASTIC_ENDPOINT_DEFAULT;
+		ELASTIC_PORT_VALUE = Integer.parseInt(parameter.get(ELASTIC_PORT_NAME) != null ? parameter.get(ELASTIC_PORT_NAME) : ELASTIC_PORT_DEFAULT);
     
     Properties properties = null;
     
@@ -269,8 +277,7 @@ public class FlinkFcdConsumer {
 
 		List<InetSocketAddress> transports = new ArrayList<InetSocketAddress>();
 		//log.info("XXXXX (InetAddress.getByName(elasticsearch), 9300))");
-		// /!\ Elasticsearch IP has to be hardcoded here /!\ //
-		transports.add(new InetSocketAddress(InetAddress.getByName("172.20.0.2"), 9300));
+		transports.add(new InetSocketAddress(InetAddress.getByName(ELASTIC_ENDPOINT_VALUE), ELASTIC_PORT_VALUE));
 		// remember experiment to address elasticsearch in s swarm -- not successful
 
 		inputStream.addSink(new ElasticsearchSink<Tuple5<Integer, Double, Double, Integer, String>>(config, transports,
