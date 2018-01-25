@@ -118,6 +118,8 @@ services:
               - datanode
         ports:
             - "9993:8042"
+        labels:
+            - "logging=true"
 
     filebrowser:
         image: bde2020/hdfs-filebrowser:latest
@@ -132,6 +134,8 @@ services:
             - datanode
         ports:
             - "9994:8088"
+        labels:
+            - "logging=true"
 
     flink-master:
         image: flowofcontrol/fm-demo
@@ -154,6 +158,8 @@ services:
               - datanode
         ports:
             - "9995:8081"
+        labels:
+            - "logging=true"
 
     flink-worker:
         image: flowofcontrol/fw-demo
@@ -169,6 +175,8 @@ services:
         volumes:
               - ./data/flink-master:/data
               - ./config/flink-worker/flink-conf.yml:/usr/local/flink/conf/flink-conf.yml
+        labels:
+            - "logging=true"
 
     producer:
         image: asjongers/sc4-fcd-flink-application:0.0.1
@@ -184,6 +192,9 @@ services:
               - ./src:/src
         env_file:
               - ./config/hadoop/hadoop.env
+        labels:
+            - "logging=true"
+
     consumer:
         image: asjongers/sc4-fcd-flink-application:0.0.1
         environment:
@@ -198,7 +209,8 @@ services:
               - ./src:/src
         env_file:
               - ./config/hadoop/hadoop.env
-
+        labels:
+            - "logging=true"
 
     monitor:
         image: bde2020/pipeline-monitor-frontend:0.1.0
@@ -210,6 +222,8 @@ services:
               VIRTUAL_HOST: monitor.big-data-europe.local
         ports:
             - "9996:80"
+        labels:
+            - "logging=true"
 
     identifier:
         image: semtech/mu-identifier:1.0.0
@@ -239,6 +253,8 @@ services:
 
     pipeline:
         image: bde2020/mu-pipeline-service:0.1.0
+        labels:
+            - "logging=true"
 
     initdaemon:
         image: bde2020/mu-init-daemon-service:0.1.0
@@ -251,6 +267,8 @@ services:
             VIRTUAL_HOST: demo.big-data-europe.local
         ports:
             - "9999:80"
+        labels:
+            - "logging=true"
 
     csswrapper:
         image: bde2020/nginx-proxy-with-css
@@ -258,6 +276,8 @@ services:
             - 8888:80
         volumes:
             - /var/run/docker.sock:/tmp/docker.sock:ro
+        labels:
+            - "logging=true"
 
     elasticsearch:
       image: bde2020/sc4-elasticsearch  # check sc4-elasticsearch/Dockerfile
@@ -266,6 +286,8 @@ services:
       ports:
         - 9201:9200
         - 9301:9300
+      labels:
+            - "logging=true"
     kibana:
       #        image: kibana:6.1.0
       image: kibana:4.5.0
@@ -273,4 +295,6 @@ services:
         ELASTICSEARCH_URL: http://elasticsearch:9200
       ports:
         - 5602:5601
+      labels:
+            - "logging=true"
 
