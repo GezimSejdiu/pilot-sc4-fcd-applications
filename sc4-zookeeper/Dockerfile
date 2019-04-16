@@ -1,4 +1,4 @@
-FROM java:8
+FROM debian:jessie
 
 MAINTAINER Karl-Heinz Sylla <karl-heinz.sylla@iais.fraunhofer.de>
 
@@ -6,10 +6,11 @@ MAINTAINER Karl-Heinz Sylla <karl-heinz.sylla@iais.fraunhofer.de>
 ENV DEBIAN_FRONTEND noninteractive
 
 # Install utilities
-RUN apt-get update && apt-get install -y netcat
+RUN apt-get update 
+RUN apt-get install -y netcat wget
 
 # Zookeeper version to be used
-ENV ZK_VERSION zookeeper-3.4.12
+ENV ZK_VERSION zookeeper-3.4.14
 
 # Download distribution
 RUN wget -q http://ftp.halifax.rwth-aachen.de/apache/zookeeper/"$ZK_VERSION"/"$ZK_VERSION".tar.gz -O /tmp/"$ZK_VERSION".tar.gz \
