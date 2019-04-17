@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # Install utilities
 RUN apt-get update 
-RUN apt-get install -y netcat wget
+RUN apt-get install -y netcat wget curl
 
 # Zookeeper version to be used
 ENV ZK_VERSION zookeeper-3.4.12
