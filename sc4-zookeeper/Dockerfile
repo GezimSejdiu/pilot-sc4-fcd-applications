@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM openjdk:8u181-jre-slim
 
 MAINTAINER Karl-Heinz Sylla <karl-heinz.sylla@iais.fraunhofer.de>
 
@@ -6,7 +6,7 @@ MAINTAINER Karl-Heinz Sylla <karl-heinz.sylla@iais.fraunhofer.de>
 ENV DEBIAN_FRONTEND noninteractive
 
 # Install utilities
-RUN apt-get update 
+RUN apt-get update
 RUN apt-get install -y netcat wget curl
 
 # Zookeeper version to be used
